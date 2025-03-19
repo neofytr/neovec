@@ -65,7 +65,7 @@ typedef struct
     {                                                                                                    \
         if ((vector_ptr)->count >= (vector_ptr)->capacity)                                               \
         {                                                                                                \
-            (vector_ptr)->capacity = ((vector_ptr)->capacity == 0) ? 1 : (vector_ptr)->capacity * 2;     \
+            (vector_ptr)->capacity = (!((vector_ptr)->capacity)) ? 1 : (vector_ptr)->capacity * 2;       \
             (vector_ptr)->items = realloc((vector_ptr)->items, (vector_ptr)->capacity * sizeof(void *)); \
             if (!(vector_ptr)->items)                                                                    \
             {                                                                                            \
@@ -113,10 +113,10 @@ typedef struct
  *     printf("%d\n", *num);
  * }
  */
-#define neovec_foreach(type_element, element_ptr, vector_ptr)                         \
-    for (type_element *element_ptr = (type_element *)(vector_ptr)->items;             \
-         (void **)element_ptr < (void **)((vector_ptr)->items + (vector_ptr)->count); \
-         element_ptr++)
+#define neovec_foreach(type_element, element_ptr, vector_ptr)                           \
+    for (type_element * (element_ptr) = (type_element *)(vector_ptr)->items;            \
+         (void **)(element_ptr) < (void **)((vector_ptr)->items + (vector_ptr)->count); \
+         (element_ptr)++)
 
 /**
  * @brief Macro to get an element at a specific index in the vector.
